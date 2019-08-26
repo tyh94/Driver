@@ -13,6 +13,11 @@ enum NetworkServiceMethod: String {
     case post
 }
 
+enum NetworkServiceEncodding: String {
+    case JSONEncodingDefault
+    case ArrayEncoding
+}
+
 protocol NetworkService {
 
     func request(url: URL,
@@ -20,8 +25,29 @@ protocol NetworkService {
                  parameters: [String: Any]?,
                  headers: [String: String]?,
                  responseKey: String?,
+                 encodding: NetworkServiceEncodding,
                  completion: @escaping (Result<Any, NetworkServiceError>) -> ())
     
+}
+
+extension NetworkService {
+
+    func request(url: URL,
+                 method: NetworkServiceMethod,
+                 parameters: [String: Any]?,
+                 headers: [String: String]?,
+                 responseKey: String?,
+                 encodding: NetworkServiceEncodding = .JSONEncodingDefault,
+                 completion: @escaping (Result<Any, NetworkServiceError>) -> ()) {
+        self.request(url: url,
+                     method: method,
+                     parameters: parameters,
+                     headers: headers,
+                     responseKey: responseKey,
+                     encodding: encodding,
+                     completion: completion)
+    }
+
 }
 
 enum NetworkServiceError: Error {

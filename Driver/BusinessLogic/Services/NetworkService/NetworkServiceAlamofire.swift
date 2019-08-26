@@ -35,6 +35,15 @@ final class NetworkServiceAlamofire {
             return .post
         }
     }
+
+    func convert(encoding: NetworkServiceEncodding) -> ParameterEncoding {
+        switch encoding {
+        case .JSONEncodingDefault:
+            return JSONEncoding.default
+        case .ArrayEncoding:
+            return ArrayEncoding()
+        }
+    }
     
 }
 
@@ -46,11 +55,12 @@ extension NetworkServiceAlamofire: NetworkService {
                  parameters: [String: Any]?,
                  headers: [String: String]?,
                  responseKey: String?,
+                 encodding: NetworkServiceEncodding,
                  completion: @escaping (Swift.Result<Any, NetworkServiceError>) -> ()) {
         manager.request(url,
                         method: convert(method: method),
                         parameters: parameters,
-                        encoding: JSONEncoding.default,
+                        encoding: convert(encoding: encodding),
                         headers: headers)
             .validate()
             .responseJSON(queue: queue) { responseJSON in
@@ -76,6 +86,50 @@ extension NetworkServiceAlamofire: NetworkService {
                     completion(.failure(.error(message: error.localizedDescription)))
                 }
         }
+    }
+
+}
+
+private let arrayParametersKey = "arrayParametersKey"
+
+extension Array {
+    func asParameters() -> Parameters {
+        return [arrayParametersKey: self]
+    }
+}
+
+
+public struct ArrayEncoding: ParameterEncoding {
+
+    public let options: JSONSerialization.WritingOptions
+
+
+    public init(options: JSONSerialization.WritingOptions = []) {
+        self.options = options
+    }
+
+    public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
+        var urlRequest = try urlRequest.asURLRequest()
+
+        guard let parameters = parameters,
+            let array = parameters[arrayParametersKey] else {
+                return urlRequest
+        }
+
+        do {
+            let data = try JSONSerialization.data(withJSONObject: array, options: options)
+
+            if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            }
+
+            urlRequest.httpBody = data
+
+        } catch {
+            throw AFError.parameterEncodingFailed(reason: .jsonEncodingFailed(error: error))
+        }
+
+        return urlRequest
     }
 
 }

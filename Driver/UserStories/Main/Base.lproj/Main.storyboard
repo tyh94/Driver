@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Send Geo View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="SendGeoViewController" customModule="Driver" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgJ-aj-A71">
+                                <rect key="frame" x="37.666666666666657" y="384" width="300" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" priority="600" constant="300" id="Bl5-MQ-i5B"/>
+                                    <constraint firstAttribute="height" constant="44" id="ydo-lq-yzU"/>
+                                </constraints>
+                                <state key="normal" title="Отправить геопозицию">
+                                    <color key="titleColor" name="titleTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendGeo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zV9-W6-QdY"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ищем текущее местоположение..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWU-oe-wXI">
+                                <rect key="frame" x="20" y="311.33333333333331" width="335" height="52.666666666666686"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" name="titleTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8CK-Yt-4OI">
+                                <rect key="frame" x="20" y="64" width="46" height="30"/>
+                                <state key="normal" title="Выход">
+                                    <color key="titleColor" name="titleTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="exit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m6o-Zc-aQy"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" name="backGroundColor"/>
+                        <constraints>
+                            <constraint firstItem="MgJ-aj-A71" firstAttribute="top" secondItem="EWU-oe-wXI" secondAttribute="bottom" constant="20" id="0lQ-0x-wvU"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MgJ-aj-A71" secondAttribute="trailing" constant="20" id="M7C-nh-NIY"/>
+                            <constraint firstItem="MgJ-aj-A71" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="WrB-dy-iLQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="EWU-oe-wXI" secondAttribute="trailing" constant="20" id="YgT-LI-ggV"/>
+                            <constraint firstItem="MgJ-aj-A71" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="b9W-wF-ydc"/>
+                            <constraint firstItem="MgJ-aj-A71" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="hCW-Eb-AdX"/>
+                            <constraint firstItem="8CK-Yt-4OI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="kIF-YU-x6m"/>
+                            <constraint firstItem="EWU-oe-wXI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="pme-Iv-Phd"/>
+                            <constraint firstItem="8CK-Yt-4OI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="rYR-Mn-Zog"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="geoLabel" destination="EWU-oe-wXI" id="bpr-W1-QuW"/>
+                        <outlet property="sendGeoButton" destination="MgJ-aj-A71" id="Oi8-Mc-Cra"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="backGroundColor">
+            <color red="0.0" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="titleTextColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
